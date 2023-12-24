@@ -109,3 +109,30 @@ DATA RUTA2.SALARIOS; -- CON DLM SE ESTA ESPECIFICANDO EL EL CARACTER QUE AYUDARA
 INFILE '/home/u63720089/sasuser.v94/salary (2).txt' DLM=".";
 INPUT PERIODO SALARIO;
 RUN;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- VIDEO 8 -------------------------
+-- AGREGAR DATOS
+-- EN ESTA CLASE SE MUESTREA COMO SE AGREGAN LOS DATOS DENTRO DEL CODIGO, PARA QUE SE PUEDA LEER DIRECTAMENTE LOS DATOS 
+-- SE TIENEN DOS FORMAS CON FORMATO LIBRE O FORMATO FIJO 
+/* FORMATO LIBRE (EL DELIMITADOR EN LOS DATOS DEBE DE SER UN ESPACIO)*/
+DATA RUTA3.CERVEZA_COL;
+INPUT MARCA$ ORIGEN$ PRECIO;
+CARDS; -- ESTA SENTENCIA AYUDA A DEFINIR QUE LO QUE ESTE DESPUES DE ESE PUNTO Y COMA SON LOS DATOS QUE SE GUSRDAN EN LA TABLA
+POKER BOYACA 4500
+AGUILA BOYACA 4500
+CLUB CUNDINAMARCA 10000
+;
+RUN;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/* FORMATO FIJO(EL FORMATO FIJO, FIJA LA CANTIDAD DE CARACTERES SI UNA PALABRA NO TIENE LA MISMA CANTIDAD QUE EL MAXIMI ESTE TO SE DEBE RELLENAR CON ESPACION)*/
+DATA RUTA4.CERVEZA_INTER;
+INPUT MARCA$ 1-9 ORIGEN$ 10-20 PRECIO 21-27; -- LOS NUMEROS 1-9 , 10-20 , 21-27 SON LOS LIMMITES DE LA CANTIDAD DE CARACTERES QUE DEBE TENER EL CAMPO
+CARDS;
+ESTRELLAG ESPAÑA     45.00
+CORONA    MEXICO     45.00
+BUMBERTH  INGLATERRA 100.00
+;
+RUN;
+
