@@ -83,4 +83,29 @@ PROC IMPORT
 	REPLACE;
 	GETNAMES=YES;
 RUN;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- VIDEO 7 -------------------------
+-- Dataset Options
+-- LA NOTACION EN SAS SE REALISA CON /*... */ 
 
+DATA RUTA2.SALARIOS(KEEP=SALARIO RENAME=SALARIO=SALARIO_EMP); -- LA SENTENCIA KEEP SE USA PARA MANTENER EL NOMBRE DE LA COLUMNA ESPECIFICADA
+															-- LA SENTENCIA RENAME RE-NOMBRAR EL CAMPO DESEADO
+INFILE '/home/u63720089/sasuser.v94/salary (2).txt';
+INPUT PERIODO SALARIO;
+RUN;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PROC PRINT
+	DATA=RUTA2.SALARIOS(OBS=3); -- CON LA SENTENCIA OBS SE PUEDE MODIFICAR LA CANTIDAD DE REGISTRO QUE NOS MUESTA EL PROC PRINT
+	DATA=RUTA2.SALARIOS(FIRSTOBS=3 OBS=3); -- CON LA SENTENCIA FIRSTOBS SE PIDE QUE EL PRIMER REGISTRO SEA EL 3 UY CON OBS SE PIDE QUE EL LIMITE SEA EL 3 
+RUN;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- VIDEO 7 -------------------------
+-- Delimitadores
+-- EL DELIMITADOR ES EL CARACTES QUE AYUDARA A SEPARA LOS DATOS ESTOS PUEDEN SER (ESPACIO,'.',';',',','|')
+DATA RUTA2.SALARIOS; -- CON DLM SE ESTA ESPECIFICANDO EL EL CARACTER QUE AYUDARA DE LIMITADOR ESTO DEPENDERA DEL COMO VENGA EL ARCHIVO
+INFILE '/home/u63720089/sasuser.v94/salary (2).txt' DLM=".";
+INPUT PERIODO SALARIO;
+RUN;
