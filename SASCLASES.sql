@@ -56,3 +56,27 @@ RUN; -- CERRAR EL PROCESO
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- VIDEO 6 -------------------------
 -- Librerias
+-- POR DEFECTO SAS GUARDA TODA LAS TABLAS EN LA LIBRERIA WORK QUE SE ENCUENTRA EN LA PESTANA LIBRERIAS
+-- WORK ES UN ESPACIO TEMPORAL TOLO QUE SE GUARDE DENTRO DESPUES DE FINALIZAR EL PORCESO SE ELIMINA
+PROC CONTENTS -- PERMITE VISULAIZAR LOS DATOS DE FORMA GENERAL DE LAS TABLAS QUE DESEAMOS MOSTRAR
+	DATA=VENTAS -- PERMITE DETERMINAR QUE TABLA SE LE VA A REALIZAR EL PROCESO
+	VARNUM;-- PERMITEE VISUALIZXAR LAS VARIABLE O NOMBRES DE CAMPOS DE LA MISMA MANERA EN QUE SE ENCUENTRAN ORDENADOS EN LA TABLA
+RUN;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- SE PUEDE CREAR UNA CARPETA NUEVA EN CUAL ALMACENE TODAS LAS LIBRERIAS Y NO SE BORREN COMO EN WORK
+-- NOTA ESTA SENTENCIA ES MEJOR USARLA EN WSP YA QUE ESTE NO ALMACENA NADA EN LA ARPETA WORK
+-- PERO SAS STUDIO DE FORMA OLINE SI ALMACEN LAS TABLAS QUE SE HAN REALIZADO
+LIBNAME RUTA 'RUTA_DE_LA _CARPETA'; -- CON ESTA SENTENCIA DE LE ASIGNA A LA RUTA DE LA CARPETA EL GUARDADO DE LOS ARCHIVOS DE LIBRERIA
+										--RUTA ES UN ALIAS QUE SE LE DA A LA RUTA DEL ARCHIVO
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- PARA ALMACENAR LAS NUEVAS TABLAS EN LA CARPETA SIMPLEMENTE AL NOMBRE DE LA TABLA EN SE LE AGREGA EL ALIAS QUE SE LE DIO A ESTA RUTA
+PROC IMPORT
+	OUT=RUTA.VENTAS -- CON ESTE ALIAS EL PROGRAMA YA ENTIENDE QUE SE DEBE GUARDAR LA TABLA EN ESTA RUTA
+	DATAFILE='/home/u63720089/sasuser.v94/Sample-Sales-Data (3).xlsx'
+	DBMS=XLSX
+	REPLACE;
+	GETNAMES=YES;
+RUN;
