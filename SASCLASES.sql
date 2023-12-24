@@ -18,3 +18,41 @@ INPUT ID ALIMENTO$ TIPO$ PESO; -- A LAS VARIABLES QUE SE LES AGREGA UN $ SON DE 
 RUN;
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- VIDEO 5 -------------------------
+-- importat XLSX
+-- en fracmento de codigo se encuentran partes de codigos que ayudan en las rutinas de pre cargao de documentos
+--solamente es requiere de <Your XLSX File> se cambie por la ruta del archivo
+PROC IMPORT DATAFILE="<Your XLSX File>"
+		    OUT=WORK.MYEXCEL
+		    DBMS=XLSX
+		    REPLACE;
+RUN;
+
+/** Print the results. **/
+
+PROC PRINT DATA=WORK.MYEXCEL; RUN;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- con la sentencia proc se usa para trabajar con datos
+-- PROC REQUIERE DE UNA KEYWORD PARA REALIZAR EL PROCESO REQUERIDO EN ESTE CASO SE UTILIZA IMPORT
+PROC IMPORT -- CON IMPORT SE IMPORTA EL ARCHIVO XLMXS QUE UNO QUIERE
+	OUT=VENTAS -- CON OUT SE LE DA EL NOMBRE A LA TABLA 
+	DATAFILE='RUTA_DEL DOCUMENTO' -- NUEVAMENTE SE USA PARA LLAMAR LA RUTA DEL ACHIVO
+	DBMS=typo_archivo -- CON ESTA SENTENCIA SE LE ASIGNA EL TIPO DE ACHIVO(XLSX)
+	REPLACE; --REMPLAZA CUALQUIER TABLA QUE TENGA EN NOMBRE DE VENTAS POR LOS NUEVOS DATOS QUE VIENES DEL DOCUMENTO
+	SHEET="HOJA_1"; -- SE USA EN EL CASO DE QUE SE TENGA MAS DE UNA HOJA DE CALCULO COLOCANDO 
+				   --ENTRE COMILLAR EL NMERO DE LA HOJA O EL NOMBRE NO SE NECESARIO SI SOLO TIENE UNA HOJA
+	GETNAMES= YES; --NOS PERMITE INDICAR SI SE DESEA QUE LOS NOMBRES DE CAMPOS 
+					--QUE ESTAN EN EL ARCHIVO DE EXEL SE CONSIDEREN PARA GENERAR LOS CAMPOS DE LA TABLA A CREAR(ESTA ISTRUCCION DEBE LLEVAR ;)
+	
+RUN;-- CERRAR EL PROCESO
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- ESTE PROCESO ES DIFERENTE YA QUE PERMITE IMPRIMIR A MANERA DE RESUMEN LA TABLA QUE SE TIENE
+-- ESTA INSTRUCCION NO ESTA DISPONIBLE EN WSP SOLO EN SAS STUDIO
+PROC PRINT DATA=NOMBRE_TABLA;-- AL APLICARLE DATA ESTA TOMA LA TABLA CON EL NOMBRE QUE SE LE ASIGNE Y ESTE GUSRADADO DENTRO DE NUESTRO PROGRAMA
+RUN; -- CERRAR EL PROCESO
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- VIDEO 6 -------------------------
+-- Librerias
