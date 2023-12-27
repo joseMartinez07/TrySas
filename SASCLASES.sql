@@ -102,7 +102,7 @@ PROC PRINT
 RUN;
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- VIDEO 7 -------------------------
+-- VIDEO 8 -------------------------
 -- Delimitadores
 -- EL DELIMITADOR ES EL CARACTES QUE AYUDARA A SEPARA LOS DATOS ESTOS PUEDEN SER (ESPACIO,'.',';',',','|')
 DATA RUTA2.SALARIOS; -- CON DLM SE ESTA ESPECIFICANDO EL EL CARACTER QUE AYUDARA DE LIMITADOR ESTO DEPENDERA DEL COMO VENGA EL ARCHIVO
@@ -111,7 +111,7 @@ INPUT PERIODO SALARIO;
 RUN;
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- VIDEO 8 -------------------------
+-- VIDEO 9 -------------------------
 -- AGREGAR DATOS
 -- EN ESTA CLASE SE MUESTREA COMO SE AGREGAN LOS DATOS DENTRO DEL CODIGO, PARA QUE SE PUEDA LEER DIRECTAMENTE LOS DATOS 
 -- SE TIENEN DOS FORMAS CON FORMATO LIBRE O FORMATO FIJO 
@@ -135,4 +135,48 @@ CORONA    MEXICO     45.00
 BUMBERTH  INGLATERRA 100.00
 ;
 RUN;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- VIDEO 10-------------------------
+-- FORMATOS
+-- EN ESTA CLASE SE VERA LOS FORMATOS DE FECHAS Y CADENAS A UTILIZAR
+------------------------------------------------------------------------------------
+-- FORMATO DE FECHAS
+DATA FECHA;
+INPUT NOMBRE$ FECHA DATE11.;-- LA NOTACION DATE11. SE USA PARA QUE LA VARIABLE TENGA EL TIPO FECHA DE(el punto al final es para indicar el tipo de varible)
+DATALINES;-- ESTA SENTENCIA REALIZA EL MISMO PROCESO DE CADRS LA CUAL PERMITE AGRGAR DATOS DESPUES DEL ";"
+JUAN 1 APR 2018
+PEDRO 10 JAN 2018
+JULIAN 5 MAY 2018
+;-- ESTE ";" ES NECESARIO QUE VAYA DESPUES DE LOS DATOS A ALMACENAR PERO REALIZANDO UN SALTO DE LINEA
+RUN;
 
+-- CON EL ANTERIOS COGIGO SE GENERO UNA TABLA LLAMADA FECHAS EN LA CUAL SE TIENEDOS TIPOS DE VARIBLES
+-- UN NOMBRE Y UN TIPO FECHA, LOS TIPO FECHA DEBEN TENER UN FORMATO EN INGLES ESTO SE ASIGNA CON DATE11.
+-- EN ESTE CODIGO SI SE EJECUTA MOSTRARA LA DIFERENCIA DE DIAS QUE HAY ENTRE 1 JAN 1960 ---> A LA FECHA QUE SE COLOCO
+
+PROC PRINT DATA=FECHAS;-- CON EL PROC ESTAMOS IMPRIMINDO LA TABLA FECHA 
+	FORMAT FECHA DATE11.;-- ESTE FORMAT NOS ENTREGARA EL MORMATO QUE NOSOTROS LE SOLICITEMOS EL 11 DE DATE ES POR LA CANTIDAD DE CARRACTERES(ES DECIR QUE PUEDEN IR VARIANDO)
+RUN;
+
+-- FORMATO CADENAS
+-- PARA EXPLICAR ESTE FORMATO SE UTILIZA EL CODIGO ANTERIOR PARA LUEGO AGREGAR FORMAT A MARCA 
+DATA CERVEZA_COL;
+FORMAT MARCA $10.;-- DE ESTA MANERA LE ESTAMOS DICIENDO AL PROGRAMA QUE FORMATE EL CAMPO NOMBRE A 10 CARACTERES
+INPUT MARCA$ ORIGEN$ PRECIO;
+CARDS; -- ESTA SENTENCIA AYUDA A DEFINIR QUE LO QUE ESTE DESPUES DE ESE PUNTO Y COMA SON LOS DATOS QUE SE GUSRDAN EN LA TABLA
+POKER BOYACA 4500
+AGUILA BOYACA 4500
+CLUB CUNDINAMARCA 10000
+;
+RUN;
+-- SI QUISIERAMOS FORMATEAR MAS CAMPOS EN SUESTRA TABLA SE DEBE COLOCAR LOS COMBRES Y LKA CANTIDAD DE CARACTERES QUE VA A LLEVAR
+DATA FECHA;
+FORMAT NOMBRE $9. FECHA DATE11.;
+INPUT NOMBRE FECHA;-- LA NOTACION DATE11. SE USA PARA QUE LA VARIABLE TENGA EL TIPO FECHA DE(el punto al final es para indicar el tipo de varible)
+DATALINES;-- ESTA SENTENCIA REALIZA EL MISMO PROCESO DE CADRS LA CUAL PERMITE AGRGAR DATOS DESPUES DEL ";"
+JUAN 1 APR 2023
+PEDRO 10 JAN 2023
+JULIAN 5 MAY 2023
+;-- ESTE ";" ES NECESARIO QUE VAYA DESPUES DE LOS DATOS A ALMACENAR PERO REALIZANDO UN SALTO DE LINEA
+RUN;
